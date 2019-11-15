@@ -1,0 +1,65 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<div id="container">
+    <div id="left-image">
+      <div id="handle"></div>
+    </div>
+    <div id="right-image"></div>
+</div>
+
+<style>
+#container{ /*Size of everything*/
+    display:flex;
+    height:add specified height;
+    width:add specified width;
+}
+#left-image{
+    background-image: url("left.jpg");
+    background-color: #000;
+    height: add specified height;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+    position: relative;
+}
+#right-image{
+    background-image: url("right.jpg");
+    background-color: #000;
+    height: add specified height;
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1;
+    flex-grow: 1;
+}
+#handle{
+   background-color:black;
+   height:100%;
+   position: absolute;
+   top: 0;
+   right: 0;
+   width: 5px;
+   cursor: ew-resize;
+}
+</style>
+
+<script>
+    var dragging = false;
+
+$('#handle').mousedown(function(e){
+  e.preventDefault();
+  dragging = true;
+  var side = $('#left-image');
+  $(document).mousemove(function(ex){
+    side.css("width", ex.pageX +2);
+  });
+});
+
+$(document).mouseup(function(e){
+  if (dragging) 
+  {
+    $(document).unbind('mousemove');
+    dragging = false;
+  }
+});
+</script>
